@@ -25,6 +25,7 @@ export const ethUnits = (wei, readable = true, round = false) => {
 };
 
 export const generalCalcBlockFeeArray = (data, ticker) => {
+
 	if (!data.feeArray && data.txFull) {
 		data.lowFee = Math.pow(10, 36);
 		data.highFee = 0;
@@ -559,8 +560,10 @@ export const ETH = {
 		}
 	},
 	getAndApplyFee: function (txData) {
+
 		if (txData.feeVal) return txData.feeVal;
 		txData.feeVal = this.getFee(txData);
+
 		return txData.feeVal;
 	},
 	userSettings: {
@@ -1449,7 +1452,7 @@ export const additionalSheets = {
 	mall: {
 		key: "mall",
 		frames: [
-			"mall.png","eth_post.png", "walkway.png", "eth_post_desk.png", "rollup_sign.png", "rollup_sign_right.png", "envelope.png"
+			"mall.png", "eth_post.png", "walkway.png", "eth_post_desk.png", "rollup_sign.png", "rollup_sign_right.png", "envelope.png"
 		]
 	}
 }
@@ -1606,7 +1609,9 @@ for (const ticker in enabledConfig) {
 		};
 	if (typeof enabledConfig[ticker].calcBlockFeeArray === "undefined")
 		enabledConfig[ticker].calcBlockFeeArray = function (data) {
-			return generalCalcBlockFeeArray(data, ticker);
+
+			let dataFee = generalCalcBlockFeeArray(data, ticker);
+			return dataFee
 		};
 }
 for (const theme in themes) {

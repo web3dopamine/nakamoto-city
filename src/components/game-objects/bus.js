@@ -326,6 +326,7 @@ Bus.prototype.setFeeText = function () {
 		: this.lowFee
 			? Math.ceil(this.lowFee) + " " + this.scene.vue.busFeeTitle
 			: "";
+	
 	if (text2 !== this.text2.text) this.text2.setText(text2);
 
 	let text3 = this.feeText2 || "";

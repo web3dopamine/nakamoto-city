@@ -42,8 +42,9 @@ class blockFactory extends EventEmitter {
 				for (let i = blocks.length - 1; i >= 0; i--) {
 					let block = blocks[i];
 					this.addBlock(block, false, true, true);
-				}
+				}				
 			}
+
 			this.emit("connected");
 		});
 
@@ -107,7 +108,7 @@ class blockFactory extends EventEmitter {
 	addBlock(data, sendNotification = true, processed = false, ignoreHeight = false) {
 		if (this.hashExistsInBlockchain(data.hash)) return false;
 		if (!data) return false;
-		
+
 		if (this.blockchain.length && !ignoreHeight && !this.config.isRollup) {
 			const highestBlocks = this.highestBlocks();
 			if (data.height <= highestBlocks[0].height) {
@@ -134,7 +135,7 @@ class blockFactory extends EventEmitter {
 			if (Math.abs(data.time - data.inserted) < 300 && data.inserted > data.time) data.time = data.inserted;
 		}
 
-		//add fee info to block from txFull
+		//add fee info to block from txFull		
 		this.config.calcBlockFeeArray(data);
 
 		this.blockchain.push(Object.seal(data));

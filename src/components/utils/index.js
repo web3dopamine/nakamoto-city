@@ -5,15 +5,15 @@ import io from "socket.io-client";
 
 export const getSheetKey = frame => {
 	const theme = config.theme;
-	if(theme.frames.includes(frame)) return theme.key;
-	if(frame.includes("person-")) return "characters";
+	if (theme.frames.includes(frame)) return theme.key;
+	if (frame.includes("person-")) return "characters";
 	for (let i = 0; i < moonheadNames.length; i++) {
 		const name = moonheadNames[i];
-		if(frame.includes(name)) return "characters";
+		if (frame.includes(name)) return "characters";
 	}
 	for (const key in additionalSheets) {
 		const sheetConfig = additionalSheets[key];
-		if(sheetConfig.frames.includes(frame)) return sheetConfig.key;
+		if (sheetConfig.frames.includes(frame)) return sheetConfig.key;
 	}
 	return "sheet";
 }
@@ -91,12 +91,12 @@ function formatCloudFlareBlock(data) {
 }
 
 export const loadBlock = async (ticker, hash, retries = 0) => {
-	if(enabledConfig[ticker].socketBlocks){
+	if (enabledConfig[ticker].socketBlocks) {
 		let socket = getSocket(ticker);
 		const promise = new Promise((resolve) => {
 			socket.socket.once("fetch-block", async (hash, error, block) => {
 				console.log(hash, error, block);
-				if(error) resolve(false);
+				if (error) resolve(false);
 				resolve(block);
 			});
 			setTimeout(() => {
@@ -139,6 +139,27 @@ export const getHouseArray = async config => {
 	try {
 		const result = await fetch(`${process.env.VUE_APP_REST_API}/static/live/houses-${config.ticker}`);
 		let houses = await result.json();
+		// const kenHouse = {
+		// 	"name": "metamask",
+		// 	"title": "House of Ken",
+		// 	"dataSources": [
+		// 		"wiki"
+		// 	],
+		// 	"popupLength": 75,
+		// 	"colors": [
+		// 		"a0263a",
+		// 		"ffffff"
+		// 	],
+		// 	"priority": 1,
+		// 	"tracked": false,
+		// 	"type": "house",
+		// 	"side": 0,
+		// 	"spawn": [
+		// 		62,
+		// 		100
+		// 	]
+		// }
+
 		if (houses) {
 			houses = houses.filter(function (obj) {
 				return obj.name !== 'donation';

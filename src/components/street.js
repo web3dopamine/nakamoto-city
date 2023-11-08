@@ -426,6 +426,7 @@ export class Street extends Phaser.Scene {
 
 	busesLoaded() {
 		if (!this.buses.children.entries.length) return false;
+		console.log("this.buses.children.entries",this.buses.children.entries)
 		for (let i = 0; i < this.buses.children.entries.length; i++) {
 			let bus = this.buses.children.entries[i];
 			if (bus.getData("leaving")) continue;
@@ -1035,6 +1036,7 @@ export class Street extends Phaser.Scene {
 		});
 
 		this.blockFactory.on("addBlock", (data, sendNotification) => {
+
 			this.vue.emitBlock(data);
 			if (
 				!document.hasFocus() &&
@@ -2080,6 +2082,7 @@ export class Street extends Phaser.Scene {
 			hashArray.sort((a, b) => {
 				return b.txData.feeVal - a.txData.feeVal;
 			});
+
 		return hashArray;
 	}
 
@@ -2159,6 +2162,7 @@ export class Street extends Phaser.Scene {
 		let busId = bus.getData("id");
 
 		let fee = this.config.getAndApplyFee(entry.txData);
+
 		if ((typeof entry.ignoreBusFee === "undefined" || !entry.ignoreBusFee) && Boolean(fee)) {
 			bus.feeArray.push(fee);
 		}
