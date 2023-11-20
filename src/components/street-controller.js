@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { config, enabledConfig, userSettings, moonheadNames } from "./config.js";
+import { config, enabledConfig, userSettings } from "./config.js";
 import { toRes, resetNeededRooms, getSheetKey } from "./utils/";
 import { resizeAll } from "./listeners.js";
 import BTCStreet from "./streets/bitcoin.js";
@@ -491,11 +491,11 @@ export class StreetController extends Phaser.Scene {
 
 			this.createPersonAnimation(i, startFrame);
 		}
-		const characters = moonheadNames;
-		for (let i = 0; i < characters.length; i++) {
-			const character = characters[i];
-			this.createPersonAnimation(character, 0, character);
-		}
+		// const characters = moonheadNames;
+		// for (let i = 0; i < characters.length; i++) {
+		// 	const character = characters[i];
+		// 	this.createPersonAnimation(character, 0, character);
+		// }
 
 		//mailman spin animation
 		this.anims.create({

@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { config, userSettings, zoomerNames } from "../config.js";
+import { config, userSettings } from "../config.js";
 import { toRes, calcStatValue, getSheetKey } from "../utils/";
 
 export default class Sign extends Phaser.GameObjects.Container {
@@ -17,19 +17,19 @@ export default class Sign extends Phaser.GameObjects.Container {
 	}
 
 	resetAd() {
-		this.adText = "Your Ad Here with MoonHeads";
-		this.adLink = "https://moonheads.io/ads";
+		this.adText = "Your Ad Here in TxStreet!";
+		this.adLink = "https://hr0a9o292ak.typeform.com/to/LSZ3l4hz";
 		if (!this.adSprites) return;
 		for (let i = 0; i < this.adSprites.length; i++) {
 			const adSprite = this.adSprites[i];
-			adSprite.setVisible(true);
+			adSprite.setVisible(false);
 		}
 	}
 
 	recreate() {
-		if(this.leftPole) this.leftPole.destroy();
-		if(this.rightPole) this.rightPole.destroy();
-		if(this.poles) this.poles.destroy();
+		if (this.leftPole) this.leftPole.destroy();
+		if (this.rightPole) this.rightPole.destroy();
+		if (this.poles) this.poles.destroy();
 		this.signBg.destroy();
 		if (this.signOutline) this.signOutline.destroy();
 		// this.coinNameText.destroy();
@@ -62,7 +62,7 @@ export default class Sign extends Phaser.GameObjects.Container {
 			this.blockchainSign.setScale(config.resolution);
 			this.add(this.blockchainSign);
 
-			this.rollupSign = this.scene.add.image(this.scene.side === "right" ? RightPoleX + toRes(55) : leftPoleX - toRes(55), toRes(-15), getSheetKey("rollup_sign" + (this.scene.side == "right"?"_right":"") + ".png"), "rollup_sign" + (this.scene.side == "right"?"_right":"") + ".png");
+			this.rollupSign = this.scene.add.image(this.scene.side === "right" ? RightPoleX + toRes(55) : leftPoleX - toRes(55), toRes(-15), getSheetKey("rollup_sign" + (this.scene.side == "right" ? "_right" : "") + ".png"), "rollup_sign" + (this.scene.side == "right" ? "_right" : "") + ".png");
 			this.rollupSign.clickObject = "rollup";
 			this.rollupSign.setInteractive({ cursor: "help" });
 			this.rollupSign.setScale(config.resolution);
@@ -81,7 +81,7 @@ export default class Sign extends Phaser.GameObjects.Container {
 		let signTop = -(toRes(151) / 2);
 		let signLeft = leftPoleX + toRes(7);
 		let signHeight =
-		toRes(151) - toRes(config.theme.signPolePadding) - toRes(this.adBanner ? 60 : 30);
+			toRes(151) - toRes(config.theme.signPolePadding) - toRes(this.adBanner ? 60 : 30);
 
 		this.signBg = this.scene.add.graphics({ fillStyle: { color: config.theme.signBgColor } });
 		this.signBg.fillRect(signLeft, signTop, this.signWidth - toRes(14), signHeight);
@@ -131,25 +131,25 @@ export default class Sign extends Phaser.GameObjects.Container {
 
 		if (this.adBanner) {
 			//adSprites
-			let adSpriteY = signTop + signHeight + toRes(50);
+			// let adSpriteY = signTop + signHeight + toRes(50);
 			this.adSprites = [];
-			let adSpriteX = -((this.fontSize * (zoomerNames.length - 1)) / 2);
-			for (let i = 0; i < zoomerNames.length; i++) {
-				const name = zoomerNames[i];
-				const fullName = name[0].toUpperCase() + name.substring(1);
-				const adSprite = this.scene.add.image(adSpriteX, adSpriteY, getSheetKey(name + "-0.png"), name + "-0.png");
-				adSprite.setScale(toRes(0.5));
-				this.adSprites.push(adSprite);
-				this.add(adSprite);
-				adSpriteX += this.fontSize;
-				let url =
-					"https://opensea.io/collection/moonheads-zoomers?search[sortAscending]=true&search[sortBy]=PRICE&search[stringTraits][0][name]=Clan&search[stringTraits][0][values][0]=" + fullName;
-				adSprite.setInteractive({ useHandCursor: true });
-				adSprite.on("pointerup", e => {
-					if (e.downElement.nodeName.toLowerCase() !== "canvas") return;
-					window.open(url);
-				});
-			}
+			// let adSpriteX = -((this.fontSize * (zoomerNames.length - 1)) / 2);
+			// for (let i = 0; i < zoomerNames.length; i++) {
+			// 	const name = zoomerNames[i];
+			// 	const fullName = name[0].toUpperCase() + name.substring(1);
+			// 	const adSprite = this.scene.add.image(adSpriteX, adSpriteY, getSheetKey(name + "-0.png"), name + "-0.png");
+			// 	adSprite.setScale(toRes(0.5));
+			// 	this.adSprites.push(adSprite);
+			// 	this.add(adSprite);
+			// 	adSpriteX += this.fontSize;
+			// 	let url =
+			// 		"https://opensea.io/collection/moonheads-zoomers?search[sortAscending]=true&search[sortBy]=PRICE&search[stringTraits][0][name]=Clan&search[stringTraits][0][values][0]=" + fullName;
+			// 	adSprite.setInteractive({ useHandCursor: true });
+			// 	adSprite.on("pointerup", e => {
+			// 		if (e.downElement.nodeName.toLowerCase() !== "canvas") return;
+			// 		window.open(url);
+			// 	});
+			// }
 
 			this.bannerBg = this.scene.add.graphics({
 				fillStyle: { color: Phaser.Display.Color.HexStringToColor("181818").color },
@@ -187,7 +187,7 @@ export default class Sign extends Phaser.GameObjects.Container {
 				this.scene.vue.htmlWindow(
 					"ad-info",
 					"Your Ad Here",
-					`The community places free ads here using MoonHeads. You can too! <a href="https://moonheads.io/ads" target="_blank">Click here</a> for more information.`
+					`The community places ads here. You can too! <a href="https://hr0a9o292ak.typeform.com/to/LSZ3l4hz" target="_blank">Click here</a> for more information.`
 				);
 			});
 			this.add(this.bannerInfo);
